@@ -29,4 +29,12 @@ class LoginController extends Controller
 
         return redirect()->route('dashboard');
     }
+
+    public function logout()
+    {
+        auth()->logout();
+        session()->invalidate();
+
+        return redirect()->route('login.show');
+    }
 }

@@ -17,6 +17,7 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/login', [LoginController::class, 'show'])->name('login.show');
 Route::post('/login', [LoginController::class, 'attempt'])->name('login.attempt');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
