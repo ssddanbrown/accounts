@@ -3,6 +3,9 @@
 A really simple finance management application for some personal
 purposes. 
 
+### Handy Links
+
+- https://www.gov.uk/self-employed-records/what-records-to-keep
 
 ### Install
 
@@ -43,6 +46,7 @@ purposefully kept narrow for my purposes to ensure longer term maintenance is vi
 
 Issues and PRs raised for bugs are perfectly fine assuming they don't significantly
 increase the scope of the project. Please don't open PRs for new features.
+
 ### Testing
 
 This project uses phpunit for testing. Tests are located within the `tests/` directory.
