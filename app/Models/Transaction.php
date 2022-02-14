@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\MoneyCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -21,9 +22,14 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $casts = [
         'transacted_at' => 'date',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'value' => MoneyCast::class,
+        'vat' => MoneyCast::class,
     ];
+
 }

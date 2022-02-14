@@ -13,7 +13,7 @@ class MoneyFormat
         $this->value = $value;
     }
 
-    public function html()
+    public function html(): HtmlString
     {
         if ($this->value === 0) {
             return new HtmlString("<span class=\"money text-muted\">-</span>");
@@ -22,6 +22,11 @@ class MoneyFormat
         $sign = $this->value < 0 ? '-' : '+';
         $class = $this->value < 0 ? 'danger' : 'success';
         return new HtmlString("<span class=\"money text-{$class}\">{$sign}£{$formattedVal}</span>");
+    }
+
+    public function input(): string
+    {
+        return number_format($this->value / 100, 2, '.', '');
     }
 
 }

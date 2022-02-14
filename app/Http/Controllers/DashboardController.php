@@ -11,7 +11,7 @@ class DashboardController extends Controller
     {
         $recentTransactions = Transaction::query()
             ->orderBy('transacted_at', 'desc')
-            ->take(30)
+            ->take(20)
             ->get();
 
         return view('dashboard.index', [

@@ -2,7 +2,7 @@
     <thead>
     <tr>
         <th width="100">Date</th>
-        <th width="60">ID</th>
+        <th width="50">ID</th>
         <th>Payee/Payer</th>
         <th>Description</th>
         <th width="100" class="text-end">Value</th>
@@ -15,10 +15,10 @@
         <tr>
             <td>{{ $transaction->transacted_at->format('Y-m-d') }}</td>
             <td>
-                <a href="{{ route('transaction.show', compact('transaction')) }}">#{{ $transaction->id }}</a>
+                <a class="text-muted small" href="{{ route('transaction.show', compact('transaction')) }}">#{{ $transaction->id }}</a>
             </td>
-            <td>{{ $transaction->transacted_with }}</td>
-            <td>{{ $transaction->description }}</td>
+            <td class="small">{{ $transaction->transacted_with }}</td>
+            <td class="small">{{ $transaction->description }}</td>
             <td class="text-danger text-end">{{ money($transaction->value)->html() }}</td>
             <td class="text-end">{{ money($transaction->vat)->html() }}</td>
             <td class="text-end">

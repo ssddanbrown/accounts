@@ -20,14 +20,14 @@
     @include('layouts.navigation')
 
     @if(session()->has('success'))
-        <div class="container pt-8 -mb-4">
-            <x-notification-success>{{ session()->get('success') }}</x-notification-success>
+        <div class="container mb-3">
+            <div class="alert alert-success">{{ session()->get('success') }}</div>
         </div>
     @endif
 
     @if(session()->has('error'))
-        <div class="container pt-8 -mb-4">
-            <x-notification-success>{{ session()->get('error') }}</x-notification-success>
+        <div class="container mb-3">
+            <div class="alert alert-danger">{{ session()->get('error') }}</div>
         </div>
     @endif
 
