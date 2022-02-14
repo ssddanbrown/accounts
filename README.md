@@ -1,17 +1,12 @@
-# Accountant
+# accounts
 
-A really simple finance management application for some personal
-purposes. 
-
-### Handy Links
-
-- https://www.gov.uk/self-employed-records/what-records-to-keep
+A really simple finance management application for some personal purposes.
 
 ### Install
 
 ```shell
 # Clone down the project files using git
-git clone https://github.com/ssddanbrown/accountant.git
+git clone https://github.com/ssddanbrown/accounts.git
 
 # cd into the application folder and install the dependencies via composer
 composer install --no-dev
@@ -43,6 +38,7 @@ chown -R www-data:www-data storage/ boostrap/cache/
 
 This is a low maintenance project. The scope of features and support are
 purposefully kept narrow for my purposes to ensure longer term maintenance is viable.
+I'm not looking to grow this into a bigger project at all.
 
 Issues and PRs raised for bugs are perfectly fine assuming they don't significantly
 increase the scope of the project. Please don't open PRs for new features.
@@ -54,11 +50,4 @@ You can run the tests using:
 
 ```shell
 ./vendor/bin/phpunit
-```
-
-This project uses [Larastan](https://github.com/nunomaduro/larastan), an extension of PHPStan,
-for static analysis. You can run static analysis checks using:
-
-```shell
-./vendor/bin/larastan analyse
 ```

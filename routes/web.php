@@ -4,6 +4,7 @@ use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,9 @@ Route::group(['middleware' => 'auth'], function() {
 
     // Dashboards
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Transaction Views
+    Route::get('/transactions/all', [TransactionViewController::class, 'all'])->name('transaction-view.all');
 
     // Transactions
     Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transaction.create');

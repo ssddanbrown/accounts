@@ -6,6 +6,7 @@ use App\Models\Attachment;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AttachmentController extends Controller
 {
@@ -18,7 +19,13 @@ class AttachmentController extends Controller
 
         $file = $request->file('file');
         $fileName = $file->getClientOriginalName();
-        $path = $file->store("attachments/{$transaction->id}");
+        $fileStorageName = $fileName;
+        $parentPath = "attachments/{$transaction->id}/";
+        while (Storage::exists("$parentPath/{$fileStorageName}")) {
+            $fileStorageName = Str::random(3) . '-' . $fileStorageName;
+        }
+
+        $path = $file->storeAs("attachments/{$transaction->id}", $fileStorageName);
 
         $attachment = new Attachment([
             'name' => $fileName,

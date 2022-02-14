@@ -69,7 +69,7 @@
                                 method="POST">
                             <div class="file-upload-zone {{ $errors->has('file') ? 'is-invalid' : '' }}">
                                 <label for="file-upload-size">
-                                    Click here or drop file to upload
+                                    Click here to choose file
                                 </label>
                                 <input id="file-upload-size"
                                        type="file"

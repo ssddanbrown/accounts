@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->date('transacted_at');
+            $table->date('transacted_at')->index();
             $table->string('transacted_with');
             $table->string('description', 500);
             $table->text('notes');
