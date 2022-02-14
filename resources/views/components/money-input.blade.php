@@ -10,9 +10,5 @@
                step="0.01"
                value="{{ old($attributes->get('name')) ?? money($attributes->get('value'))->input() ?? '' }}">
     </div>
-    @foreach($errors->get($attributes->get('name')) as $error)
-        <div class="invalid-feedback">
-            {{ $error }}
-        </div>
-    @endforeach
+    <x-input-errors :name="$attributes->get('name')"/>
 </div>

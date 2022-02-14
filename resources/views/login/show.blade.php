@@ -5,9 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-sm-6 col-md-6">
             <div class="card">
-                <div class="card-header">
-                    Login
-                </div>
                 <div class="card-body">
 
                     <x-form action="{{ route('login.attempt') }}" method="post">

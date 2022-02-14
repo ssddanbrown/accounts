@@ -6,9 +6,5 @@
               rows="{{ $attributes->get('rows') ?? 5 }}"
               columns="{{ $attributes->get('columns') ?? 5 }}"
               class="form-control {{ $errors->has($attributes->get('name')) ? 'is-invalid' : '' }}">{{ old($attributes->get('name')) ?? $attributes->get('value') ?? '' }}</textarea>
-    @foreach($errors->get($attributes->get('name')) as $error)
-        <div class="invalid-feedback">
-            {{ $error }}
-        </div>
-    @endforeach
+    <x-input-errors :name="$attributes->get('name')"/>
 </div>

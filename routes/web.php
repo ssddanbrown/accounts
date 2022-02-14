@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TransactionController;
@@ -35,4 +36,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('/transactions/{transaction}', [TransactionController::class, 'update'])->name('transaction.update');
     Route::delete('/transactions/{transaction}', [TransactionController::class, 'delete'])->name('transaction.delete');
 
+    // Attachments
+    Route::post('/transactions/{transaction}/attach', [AttachmentController::class, 'store'])->name('attachment.store');
+    Route::get('/attachments/{attachment}', [AttachmentController::class, 'show'])->name('attachment.show');
+    Route::put('/attachments/{attachment}', [AttachmentController::class, 'update'])->name('attachment.update');
+    Route::delete('/attachments/{attachment}', [AttachmentController::class, 'delete'])->name('attachment.delete');
 });

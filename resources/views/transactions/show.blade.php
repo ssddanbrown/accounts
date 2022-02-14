@@ -55,11 +55,31 @@
             <h2 class="fs-6">Attachments</h2>
         </div>
 
-        <div class="card mb-5">
-            <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item">An item</a>
-                <a href="#" class="list-group-item">A second item</a>
-                <a href="#" class="list-group-item">A third item</a>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-5">
+                    @include('transactions.parts.attachment-list', ['attachments' => $transaction->attachments])
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <x-form action="{{ route('attachment.store', compact('transaction')) }}"
+                                enctype="multipart/form-data"
+                                method="POST">
+                            <div class="file-upload-zone {{ $errors->has('file') ? 'is-invalid' : '' }}">
+                                <label for="file-upload-size">
+                                    Click here or drop file to upload
+                                </label>
+                                <input id="file-upload-size"
+                                       type="file"
+                                       name="file"
+                                       onchange="this.closest('form').submit()">
+                            </div>
+                            <x-input-errors name="file"/>
+                        </x-form>
+                    </div>
+                </div>
             </div>
         </div>
 

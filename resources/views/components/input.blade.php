@@ -6,9 +6,5 @@
            class="form-control {{ $errors->has($attributes->get('name')) ? 'is-invalid' : '' }}"
            type="{{ $attributes->get('type', 'text') }}"
            value="{{ old($attributes->get('name')) ?? $attributes->get('value') ?? '' }}">
-    @foreach($errors->get($attributes->get('name')) as $error)
-        <div class="invalid-feedback">
-            {{ $error }}
-        </div>
-    @endforeach
+    <x-input-errors :name="$attributes->get('name')"/>
 </div>

@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Casts\MoneyCast;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -17,6 +19,7 @@ use Illuminate\Support\Carbon;
  * @property int $vat
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property Collection<Attachment> $attachments
  */
 class Transaction extends Model
 {
@@ -31,5 +34,10 @@ class Transaction extends Model
         'value' => MoneyCast::class,
         'vat' => MoneyCast::class,
     ];
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(Attachment::class);
+    }
 
 }

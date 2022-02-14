@@ -1,7 +1,5 @@
 <form
-     @if($attributes->has('id'))
-      id="{{ $attributes->get('id') }}"
-     @endif
+      {{ $attributes->only(['id', 'enctype', 'class']) }}
       action="{{ $attributes->get('action') }}"
       method="{{ strtolower($attributes->get('method')) === 'get' ? 'GET' : 'POST' }}">
 

@@ -55,6 +55,9 @@ class TransactionController extends Controller
 
     public function delete(Transaction $transaction)
     {
+        foreach ($transaction->attachments as $attachment) {
+            $attachment->deleteWithFile();
+        }
         $transaction->delete();
 
         $this->showSuccessMessage("Transaction deleted!");
