@@ -20,11 +20,11 @@
                             method="delete"
                             class="d-inline-block position-relative toggle-block">
                         <button class="btn btn-link" type="button">Delete</button>
-                        <div class="toggle-block-content dropdown-menu p-4">
-                            <p class="text-danger">
-                                Are you sure you want to delete this file?
+                        <div class="toggle-block-content dropdown-menu p-3">
+                            <p class="text-danger small">
+                                Are you sure you want to delete this attachment?
                             </p>
-                            <button class="btn btn-danger">Delete</button>
+                            <button class="btn btn-danger btn-sm">Delete</button>
                         </div>
                     </x-form>
                 </div>

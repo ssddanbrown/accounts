@@ -3,6 +3,7 @@
            class="form-label">{{ $slot }}</label>
     <input id="input_{{ $attributes->get('name') }}"
            name="{{ $attributes->get('name') }}"
+           list="{{ $attributes->get('list', '') }}"
            class="form-control {{ $errors->has($attributes->get('name')) ? 'is-invalid' : '' }}"
            type="{{ $attributes->get('type', 'text') }}"
            value="{{ old($attributes->get('name')) ?? $attributes->get('value') ?? '' }}">
