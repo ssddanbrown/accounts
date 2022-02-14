@@ -7,7 +7,7 @@
                 <h2 class="fs-6">Recent Transactions</h2>
             </div>
             <div class="col-sm-6 text-sm-end">
-                <a href="{{ route('transaction.create') }}">Add Transaction</a>
+                <a class="btn btn-link" href="{{ route('transaction.create') }}">Add Transaction</a>
             </div>
         </div>
 

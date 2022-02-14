@@ -58,3 +58,7 @@ svg {
     vertical-align: middle;
 }
 
+label {
+    font-weight: bold;
+    font-size: .9rem;
+}
