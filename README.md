@@ -1,6 +1,17 @@
-# accounts
+# Accounts
 
 A really simple finance management application for some personal purposes.
+
+TODO: Create generic docker container.
+
+### Low Maintenance Project
+
+This is a low maintenance project. The scope of features and support are
+purposefully kept narrow for my purposes to ensure longer term maintenance is viable.
+I'm not looking to grow this into a bigger project at all.
+
+Issues and PRs raised for bugs are perfectly fine assuming they don't significantly
+increase the scope of the project. Please don't open PRs for new features.
 
 ### Install
 
@@ -33,15 +44,6 @@ chown -R www-data:www-data storage/ boostrap/cache/
 # Set up your webserver with the root pointing at the `public/` folder. (Nginx "root" or Apache "DocumentRoot"). 
 # Done!
 ```
-
-### Low Maintenance Project
-
-This is a low maintenance project. The scope of features and support are
-purposefully kept narrow for my purposes to ensure longer term maintenance is viable.
-I'm not looking to grow this into a bigger project at all.
-
-Issues and PRs raised for bugs are perfectly fine assuming they don't significantly
-increase the scope of the project. Please don't open PRs for new features.
 
 ### Testing
 
