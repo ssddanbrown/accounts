@@ -31,6 +31,6 @@ class MoneyCast implements CastsAttributes
      */
     public function set($model, string $key, $value, array $attributes)
     {
-        return is_int($value) ? $value : intval(floatval($value) * 100);
+        return is_int($value) ? $value : round(floatval($value) * 100);
     }
 }
