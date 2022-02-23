@@ -2,8 +2,6 @@
 
 A really simple finance management application for some personal purposes.
 
-TODO: Create generic docker container.
-
 ### Low Maintenance Project
 
 This is a low maintenance project. The scope of features and support are
@@ -34,12 +32,8 @@ touch storage/database/database.sqlite
 # Migrate the database
 php artisan migrate
 
-# Install and build JS/CSS dependencies
-npm install
-npm run build
-
 # Check the storage/ and boostrap/cache (and all subfolders) are writable by the webserver, Commands reflect ubuntu common defaults
-chown -R www-data:www-data storage/ boostrap/cache/
+chown -R www-data:www-data storage/ bootstrap/cache/
 
 # Set up your webserver with the root pointing at the `public/` folder. (Nginx "root" or Apache "DocumentRoot"). 
 # Done!

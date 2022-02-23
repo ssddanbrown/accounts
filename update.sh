@@ -5,7 +5,7 @@
 
 php artisan down && \
 cp storage/database/database.sqlite ./database-backup.sqlite
-git pull origin master && \
+git pull origin main && \
 composer install --optimize-autoloader --no-dev && \
 php artisan migrate --force && \
 npm install && \
