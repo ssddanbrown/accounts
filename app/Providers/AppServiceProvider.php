@@ -27,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFive();
         URL::forceRootUrl(config('app.url'));
+        URL::forceScheme(str_starts_with(config('app.url'), 'https:') ? 'https' : 'http');
     }
 }
