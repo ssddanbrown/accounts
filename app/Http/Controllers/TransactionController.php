@@ -11,8 +11,8 @@ class TransactionController extends Controller
         'transacted_at' => ['required', 'date'],
         'transacted_with' => ['required', 'string'],
         'value' => ['required', 'numeric'],
-        'description' => ['string'],
-        'notes' => ['string'],
+        'description' => ['nullable', 'string'],
+        'notes' => ['nullable', 'string'],
     ];
 
     public function create()

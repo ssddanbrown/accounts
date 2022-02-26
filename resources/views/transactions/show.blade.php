@@ -29,11 +29,6 @@
                             <label>Value</label>
                             <p>{{ money($transaction->value)->html() }}</p>
                         </div>
-
-                        <div>
-                            <label>VAT</label>
-                            <p>{{ money($transaction->vat)->html() }}</p>
-                        </div>
                     </div>
                     <div class="col-sm-6">
                         <div>
