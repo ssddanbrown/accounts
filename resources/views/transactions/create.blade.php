@@ -17,7 +17,7 @@
                 <x-form id="transaction-form"
                         action="{{ route('transaction.store') }}"
                         method="post">
-                    @include('transactions.parts.form', ['transaction' => null])
+                    @include('transactions.parts.form', ['transaction' => $model ?? null])
                 </x-form>
             </div>
         </div>

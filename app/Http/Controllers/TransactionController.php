@@ -15,9 +15,12 @@ class TransactionController extends Controller
         'notes' => ['nullable', 'string'],
     ];
 
-    public function create()
+    public function create(Request $request)
     {
-        return view('transactions.create');
+        $modelId = $request->get('model');
+        $model = $modelId ? Transaction::query()->findOrFail($modelId) : null;
+
+        return view('transactions.create', compact('model'));
     }
 
     public function store(Request $request)
@@ -61,5 +64,10 @@ class TransactionController extends Controller
 
         $this->showSuccessMessage("Transaction deleted!");
         return redirect()->route('dashboard');
+    }
+
+    public function copy(Transaction $transaction)
+    {
+        return redirect()->route('transaction.create', ['model' => $transaction->id]);
     }
 }

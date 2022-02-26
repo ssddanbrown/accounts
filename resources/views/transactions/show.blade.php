@@ -8,7 +8,9 @@
                 <h2 class="fs-6">Transaction #{{ $transaction->id }}</h2>
             </div>
             <div class="col-sm-6 text-sm-end">
-                <a class="btn btn-link" href="{{ route('transaction.create') }}">New Transaction</a>
+                <a class="btn btn-link" href="{{ route('transaction.create') }}">New</a>
+                |
+                <a class="btn btn-link" href="{{ route('transaction.copy', compact('transaction')) }}">Copy</a>
                 |
                 <a class="btn btn-link" href="{{ route('transaction.edit', compact('transaction')) }}">Edit</a>
             </div>

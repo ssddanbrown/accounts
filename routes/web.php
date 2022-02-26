@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/transactions/{transaction}/edit', [TransactionController::class, 'edit'])->name('transaction.edit');
     Route::put('/transactions/{transaction}', [TransactionController::class, 'update'])->name('transaction.update');
     Route::delete('/transactions/{transaction}', [TransactionController::class, 'delete'])->name('transaction.delete');
+    Route::get('/transactions/{transaction}/copy', [TransactionController::class, 'copy'])->name('transaction.copy');
 
     // Attachments
     Route::post('/transactions/{transaction}/attach', [AttachmentController::class, 'store'])->name('attachment.store');
