@@ -8,8 +8,6 @@
             </div>
             <div class="col-md-4 small">
                 <span>Total Value: {{ money($totalValue)->html() }}</span>
-                <span class="mx-3 d-inline-block text-muted">|</span>
-                <span>Total VAT: {{ money($totalVat)->html() }}</span>
             </div>
             <div class="col-md-4 text-sm-end">
                 <a class="btn btn-link" href="{{ route('transaction.create') }}">Add Transaction</a>

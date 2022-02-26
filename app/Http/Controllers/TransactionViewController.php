@@ -25,12 +25,10 @@ class TransactionViewController extends Controller
             'date_to' => $dateTo,
         ]);
         $totalValue = $query->clone()->sum('value');
-        $totalVat = $query->clone()->sum('vat');
 
         return view('transactions.views.all', compact(
             'transactions',
             'totalValue',
-            'totalVat',
             'dateTo',
             'dateFrom',
         ));

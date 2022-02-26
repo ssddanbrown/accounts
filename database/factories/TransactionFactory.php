@@ -23,7 +23,6 @@ class TransactionFactory extends Factory
             'description' => $this->faker->words(5, true),
             'notes' => $this->faker->paragraph,
             'value' => $value,
-            'vat' => rand(0, 1) === 1 ? ceil($value / 20) : 0,
         ];
     }
 }

@@ -16,7 +16,6 @@ use Illuminate\Support\Carbon;
  * @property string $description
  * @property string $notes
  * @property int $value
- * @property int $vat
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Collection<Attachment> $attachments
@@ -32,7 +31,6 @@ class Transaction extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'value' => MoneyCast::class,
-        'vat' => MoneyCast::class,
     ];
 
     public function attachments(): HasMany

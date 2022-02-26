@@ -6,7 +6,6 @@
         <th>Payee/Payer</th>
         <th>Description</th>
         <th width="100" class="text-end">Value</th>
-        <th width="100" class="text-end">VAT</th>
         <th width="100" class="text-end"></th>
     </tr>
     </thead>
@@ -24,7 +23,6 @@
             </td>
             <td class="small">{{ $transaction->description }}</td>
             <td class="text-danger text-end">{{ money($transaction->value)->html() }}</td>
-            <td class="text-end">{{ money($transaction->vat)->html() }}</td>
             <td class="text-end">
                 <a href="{{ route('transaction.show', compact('transaction')) }}">View</a>
             </td>
