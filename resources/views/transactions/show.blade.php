@@ -68,13 +68,28 @@
                                 enctype="multipart/form-data"
                                 method="POST">
                             <div class="file-upload-zone {{ $errors->has('file') ? 'is-invalid' : '' }}">
-                                <label for="file-upload-size">
-                                    Click here to choose file
+                                <label for="file-upload" id="dropzone">
+                                    Click or drop a file here to upload
                                 </label>
-                                <input id="file-upload-size"
+                                <input id="file-upload"
                                        type="file"
                                        name="file"
                                        onchange="this.closest('form').submit()">
+                                <script>
+                                    const dropzone = document.getElementById('dropzone');
+                                    const fileInput = document.getElementById('file-upload');
+
+                                    fileInput.addEventListener('change', () => fileInput.closest('form').submit());
+
+                                    dropzone.addEventListener('dragover', (e) => e.preventDefault());
+                                    dropzone.addEventListener('dragenter', _ => dropzone.classList.toggle('drag-over', true));
+                                    dropzone.addEventListener('dragleave', _ => dropzone.classList.toggle('drag-over', false));
+                                    dropzone.addEventListener('drop', (e) => {
+                                        e.preventDefault();
+                                        fileInput.files = e.dataTransfer.files;
+                                        fileInput.dispatchEvent(new Event('change', {bubbles: true}));
+                                    });
+                                </script>
                             </div>
                             <x-input-errors name="file"/>
                         </x-form>

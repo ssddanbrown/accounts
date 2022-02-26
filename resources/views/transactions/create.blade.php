@@ -16,8 +16,13 @@
             <div class="card-body">
                 <x-form id="transaction-form"
                         action="{{ route('transaction.store') }}"
+                        enctype="multipart/form-data"
                         method="post">
                     @include('transactions.parts.form', ['transaction' => $model ?? null])
+
+                    <hr>
+
+                    <x-input type="file" name="file">Attachment</x-input>
                 </x-form>
             </div>
         </div>

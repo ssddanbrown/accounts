@@ -4,39 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Attachment;
 use App\Models\Transaction;
+use App\Services\AttachmentStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class AttachmentController extends Controller
 {
 
-    public function store(Request $request, Transaction $transaction)
+    public function store(Request $request, AttachmentStore $store, Transaction $transaction)
     {
         $this->validate($request, [
             'file' => ['required', 'file']
         ]);
 
         $file = $request->file('file');
-        $fileName = $file->getClientOriginalName();
-        $fileStorageName = $fileName;
-        $parentPath = "attachments/{$transaction->id}/";
-        while (Storage::exists("$parentPath/{$fileStorageName}")) {
-            $fileStorageName = Str::random(3) . '-' . $fileStorageName;
-        }
-
-        $path = $file->storeAs("attachments/{$transaction->id}", $fileStorageName);
-
-        $attachment = new Attachment([
-            'name' => $fileName,
-            'file' => $path,
-            'size' => $file->getSize(),
-            'extension' => $file->getClientOriginalExtension(),
-        ]);
+        $attachment = $store->storeForTransaction($transaction, $file);
 
         $transaction->attachments()->save($attachment);
         $this->showSuccessMessage('Attachment uploaded!');
-
 
         return redirect()->route('transaction.show', compact('transaction'));
     }

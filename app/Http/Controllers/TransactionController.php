@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Services\AttachmentStore;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 
 class TransactionController extends Controller
 {
@@ -23,12 +25,17 @@ class TransactionController extends Controller
         return view('transactions.create', compact('model'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, AttachmentStore $attachmentStore)
     {
         $validated = $this->validate($request, $this->rules);
 
         $transaction = new Transaction($validated);
         $transaction->save();
+
+        $attachment = $request->file('file');
+        if ($attachment instanceof  UploadedFile) {
+            $attachmentStore->storeForTransaction($transaction, $attachment);
+        }
 
         $this->showSuccessMessage("Transaction created!");
 

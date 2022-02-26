@@ -71,7 +71,15 @@ label {
     padding: 1rem;
     text-align: center;
     font-style: italic;
+    transition: all ease-in-out 240ms;
 }
+
+.file-upload-zone label.drag-over {
+    background-color: rgba(20, 100, 150, 0.5);
+    border-style: dashed;
+    color: #FFF;
+}
+
 .file-upload-zone input {
     display: none;
 }
