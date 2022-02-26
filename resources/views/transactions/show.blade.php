@@ -8,6 +8,8 @@
                 <h2 class="fs-6">Transaction #{{ $transaction->id }}</h2>
             </div>
             <div class="col-sm-6 text-sm-end">
+                <a class="btn btn-link" href="{{ route('transaction.create') }}">New Transaction</a>
+                |
                 <a class="btn btn-link" href="{{ route('transaction.edit', compact('transaction')) }}">Edit</a>
             </div>
         </div>
@@ -20,6 +22,7 @@
                             <label>Transaction Date</label>
                             <p>{{ $transaction->transacted_at->format('Y-m-d') }}</p>
                         </div>
+
                         <div>
                             <label>Payer/Payee</label>
                             <p>{{ $transaction->transacted_with }}</p>
