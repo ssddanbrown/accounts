@@ -2,6 +2,12 @@
 
     <div class="container">
 
+        <div>
+            <h2 class="fs-6">Latest Note</h2>
+            @include('notes.parts.note-card', ['note' => $latestNote])
+        </div>
+
+
         <div class="row align-items-center mb-2">
             <div class="col-sm-6">
                 <h2 class="fs-6">Recent Transactions</h2>

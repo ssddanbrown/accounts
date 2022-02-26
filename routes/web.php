@@ -3,6 +3,7 @@
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransactionViewController;
 
@@ -46,4 +47,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/attachments/{attachment}', [AttachmentController::class, 'show'])->name('attachment.show');
     Route::put('/attachments/{attachment}', [AttachmentController::class, 'update'])->name('attachment.update');
     Route::delete('/attachments/{attachment}', [AttachmentController::class, 'delete'])->name('attachment.delete');
+
+    // Notes
+    Route::get('/notes', [NoteController::class, 'index'])->name('note.index');
+    Route::get('/notes/create', [NoteController::class, 'create'])->name('note.create');
+    Route::post('/notes', [NoteController::class, 'store'])->name('note.store');
+    Route::get('/notes/{note}/edit', [NoteController::class, 'edit'])->name('note.edit');
+    Route::put('/notes/{note}', [NoteController::class, 'update'])->name('note.update');
+    Route::delete('/notes/{note}', [NoteController::class, 'delete'])->name('note.delete');
 });

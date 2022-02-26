@@ -5,6 +5,7 @@
             @auth
                 <a class="btn btn-link" href="{{ route('dashboard') }}">Home</a>
                 <a class="btn btn-link" href="{{ route('transaction-view.all') }}">Transactions</a>
+                <a class="btn btn-link" href="{{ route('note.index') }}">Notes</a>
                 <a class="btn btn-link" href="{{ route('logout') }}">Logout</a>
             @endauth
         </div>
