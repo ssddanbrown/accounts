@@ -14,7 +14,8 @@ class TransactionViewController extends Controller
         $query = Transaction::query()
             ->orderBy('transacted_at', 'desc')
             ->where('transacted_at', '>=', $dateFrom)
-            ->where('transacted_at', '<=', $dateTo);
+            ->where('transacted_at', '<=', $dateTo)
+            ->withCount('attachments');
 
         if ($request->has('transacted_with')) {
             $query->where('transacted_with', '=', $request->get('transacted_with'));
