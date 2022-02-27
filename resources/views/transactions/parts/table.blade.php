@@ -3,6 +3,7 @@
     <tr>
         <th width="100">Date</th>
         <th width="50">ID</th>
+        <th width="160">Category</th>
         <th>Payee/Payer</th>
         <th>Description</th>
         <th width="100" class="text-end">Value</th>
@@ -19,6 +20,7 @@
                 <a class="text-muted small"
                    href="{{ route('transaction.show', compact('transaction')) }}">#{{ $transaction->id }}</a>
             </td>
+            <td class="small">{{ $transaction->category->name ?? '' }}</td>
             <td class="small">
                 <a href="{{ route('transaction-view.all', ['transacted_with' => $transaction->transacted_with, 'date_from' => '2000-01-01', 'date_to' => '2100-01-01']) }}"
                    class="text-reset">{{ $transaction->transacted_with }}</a>

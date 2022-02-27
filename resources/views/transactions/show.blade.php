@@ -37,6 +37,11 @@
                     </div>
                     <div class="col-sm-6">
                         <div>
+                            <label>Category</label>
+                            <p>{{ $transaction->category->name ?? '-' }}</p>
+                        </div>
+
+                        <div>
                             <label>Description</label>
                             <p>{{ $transaction->description ?: '-' }}</p>
                         </div>

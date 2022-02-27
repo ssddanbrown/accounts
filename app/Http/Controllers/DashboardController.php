@@ -12,6 +12,7 @@ class DashboardController extends Controller
     {
         $recentTransactions = Transaction::query()
             ->orderBy('transacted_at', 'desc')
+            ->with('category')
             ->withCount('attachments')
             ->take(20)
             ->get();

@@ -5,6 +5,9 @@
         <x-money-input name="value" :value="$transaction->value ?? 0">Value</x-money-input>
     </div>
     <div class="col-md-6">
+        <x-select name="category_id"
+                  :options="\App\Models\Category::selectOptionsList()"
+                  :value="$transaction->category_id ?? ''">Category</x-select>
         <x-input name="description" :value="$transaction->description ?? ''">Description</x-input>
         <x-textarea name="notes" :value="$transaction->notes ?? ''">Notes</x-textarea>
     </div>

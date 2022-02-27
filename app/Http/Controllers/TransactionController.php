@@ -15,6 +15,7 @@ class TransactionController extends Controller
         'value' => ['required', 'numeric'],
         'description' => ['nullable', 'string'],
         'notes' => ['nullable', 'string'],
+        'category_id' => ['nullable', 'int', 'exists:categories,id']
     ];
 
     public function create(Request $request)
