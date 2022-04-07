@@ -9,6 +9,7 @@ class CategoryController extends Controller
 {
     protected array $rules = [
         'name' => ['required', 'string'],
+        'short_name' => ['required', 'string'],
     ];
 
     public function index()

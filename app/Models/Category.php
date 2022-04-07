@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $name
+ * @property string $short_name
  */
 class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'short_name'];
 
     public function transactions(): HasMany
     {
@@ -22,9 +23,10 @@ class Category extends Model
 
     public static function selectOptionsList(): array
     {
-        return [null => '- None -'] + static::query()->select(['id', 'name'])
+        return [null => '- None -'] + static::query()->select(['id', 'name', 'short_name'])
             ->get()
-            ->pluck('name', 'id')
+            ->keyBy('id')
+            ->map(fn(Category $category) => $category->short_name . " " . $category->name)
             ->toArray();
     }
 }

@@ -18,7 +18,7 @@
                     <div class="small text-muted float-end">
                         <a href="{{ route('category.edit', compact('category')) }}">Edit</a>
                     </div>
-                    <p class="mb-1">{{ $category->name }}</p>
+                    <p class="mb-1">{{ $category->short_name }} &nbsp; {{ $category->name }}</p>
                 </div>
             </div>
         @endforeach
