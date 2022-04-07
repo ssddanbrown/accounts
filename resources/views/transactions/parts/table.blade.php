@@ -15,7 +15,11 @@
     <tbody>
     @foreach($transactions as $transaction)
         <tr>
-            <td>{{ $transaction->transacted_at->format('Y-m-d') }}</td>
+            <td>
+                <a class="text-dark" href="{{ route('transaction-view.month', ['yearMonth' => $transaction->transacted_at->format('Y-m')]) }}">
+                    {{ $transaction->transacted_at->format('Y-m-d') }}
+                </a>
+            </td>
             <td>
                 <a class="text-muted small"
                    href="{{ route('transaction.show', compact('transaction')) }}">#{{ $transaction->id }}</a>
@@ -24,7 +28,7 @@
                 {{ $transaction->category->short_name ?? '' }}
             </td>
             <td class="small">
-                <a href="{{ route('transaction-view.all', ['transacted_with' => $transaction->transacted_with, 'date_from' => '2000-01-01', 'date_to' => '2100-01-01']) }}"
+                <a href="{{ route('transaction-view.payee', ['payee' => $transaction->transacted_with]) }}"
                    class="text-reset">{{ $transaction->transacted_with }}</a>
             </td>
             <td class="small">{{ $transaction->description }}</td>

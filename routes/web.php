@@ -32,7 +32,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     // Transaction Views
-    Route::get('/transactions/all', [TransactionViewController::class, 'all'])->name('transaction-view.all');
+    Route::get('/transactions/month/{yearMonth}', [TransactionViewController::class, 'month'])->name('transaction-view.month');
+    Route::get('/transactions/payee/{payee}', [TransactionViewController::class, 'payee'])->name('transaction-view.payee');
 
     // Transactions
     Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transaction.create');

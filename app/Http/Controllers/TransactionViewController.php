@@ -3,36 +3,68 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class TransactionViewController extends Controller
 {
-    public function all(Request $request)
+
+    protected function getBaseQuery(): Builder
     {
-        $dateFrom = $request->get('date_from') ?? now()->setDay(1)->format('Y-m-d');
-        $dateTo = $request->get('date_to') ?? now()->addMonth()->setDay(0)->format('Y-m-d');
-        $query = Transaction::query()
+        return Transaction::query()
             ->orderBy('transacted_at', 'desc')
-            ->where('transacted_at', '>=', $dateFrom)
-            ->where('transacted_at', '<=', $dateTo)
             ->withCount('attachments')
             ->with('category');
+    }
 
-        if ($request->has('transacted_with')) {
-            $query->where('transacted_with', '=', $request->get('transacted_with'));
+    protected function getTotals(Builder $query): array
+    {
+        $in = $query->clone()->where('value', '>', 0)->sum('value');
+        $out = $query->clone()->where('value', '<', 0)->sum('value');
+        return [
+            'in' => $in,
+            'out' => $out,
+            'sum' => $in + $out,
+        ];
+    }
+
+    public function month(string $yearMonth)
+    {
+        if ($yearMonth === 'now') {
+            return redirect()->route('transaction-view.month', ['yearMonth' => now()->subMonth()->format('Y-m')]);
         }
 
-        $transactions = $query->clone()->paginate()->appends([
-            'date_from' => $dateFrom,
-            'date_to' => $dateTo,
-        ]);
-        $totalValue = $query->clone()->sum('value');
+        $dateFrom = Carbon::createFromFormat('Y-m', $yearMonth)->startOfMonth();
+        $dateTo = $dateFrom->clone()->endOfMonth();
 
-        return view('transactions.views.all', compact(
-            'transactions',
-            'totalValue',
-            'dateTo',
-            'dateFrom',
-        ));
+        $query = $this->getBaseQuery()
+            ->where('transacted_at', '>=', $dateFrom)
+            ->where('transacted_at', '<=', $dateTo);
+
+        $months = Transaction::query()->toBase()
+            ->selectRaw('distinct substr(transacted_at, 0, 8) as month')
+            ->orderBy('month', 'desc')
+            ->get()
+            ->pluck('month')
+            ->toArray();
+
+        return view('transactions.views.month', [
+            'transactions' => $query->paginate(),
+            'totals' => $this->getTotals($query),
+            'months' => $months,
+            'yearMonth' => $yearMonth,
+        ]);
+    }
+
+    public function payee(string $payee)
+    {
+        $query = $this->getBaseQuery()->where('transacted_with', '=', $payee);
+
+        return view('transactions.views.payee', [
+            'transactions' => $query->paginate(),
+            'totals' => $this->getTotals($query),
+            'payee' => $payee,
+        ]);
     }
 }

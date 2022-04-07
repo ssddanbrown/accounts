@@ -22,12 +22,20 @@
                     <div class="col-sm-6">
                         <div>
                             <label>Transaction Date</label>
-                            <p>{{ $transaction->transacted_at->format('Y-m-d') }}</p>
+                            <p>
+                                <a href="{{ route('transaction-view.month', ['yearMonth' => $transaction->transacted_at->format('Y-m')]) }}">
+                                    {{ $transaction->transacted_at->format('Y-m-d') }}
+                                </a>
+                            </p>
                         </div>
 
                         <div>
                             <label>Payer/Payee</label>
-                            <p>{{ $transaction->transacted_with }}</p>
+                            <p>
+                                <a href="{{ route('transaction-view.payee', ['payee' => $transaction->transacted_with]) }}">
+                                    {{ $transaction->transacted_with }}
+                                </a>
+                            </p>
                         </div>
 
                         <div>
