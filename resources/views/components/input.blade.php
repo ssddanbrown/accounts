@@ -4,6 +4,11 @@
     <input id="input_{{ $attributes->get('name') }}"
            {{ $attributes->only(['name', 'list', 'type', 'autocomplete']) }}
            class="form-control {{ $errors->has($attributes->get('name')) ? 'is-invalid' : '' }}"
-           value="{{ old($attributes->get('name')) ?? $attributes->get('value') ?? '' }}">
+           @if(old($attributes->get('name')))
+           value="{{ old($attributes->get('name')) }}"
+           @else
+           value="{!! $attributes->get('value') ?? '' !!}"
+        @endif
+    >
     <x-input-errors :name="$attributes->get('name')"/>
 </div>
