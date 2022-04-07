@@ -32,7 +32,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->integer('vat', false, false);
+            $table->integer('vat', false, false)->default(0);
         });
     }
 };
