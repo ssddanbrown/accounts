@@ -1,5 +1,7 @@
 # Accounts
 
+[![PHPUnit](https://github.com/ssddanbrown/accounts/actions/workflows/phpunit.yml/badge.svg?branch=main&event=push)](https://github.com/ssddanbrown/accounts/actions/workflows/phpunit.yml)
+
 A really simple finance management application for some personal purposes.
 
 ### Low Maintenance Project

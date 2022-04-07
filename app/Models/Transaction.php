@@ -19,6 +19,7 @@ use Illuminate\Support\Carbon;
  * @property int $value
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property int $category_id
  * @property Collection<Attachment> $attachments
  */
 class Transaction extends Model
