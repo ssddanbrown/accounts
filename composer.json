@@ -20,7 +20,8 @@
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^6.1",
         "nunomaduro/larastan": "^2.0.1",
-        "phpunit/phpunit": "^9.5.10"
+        "phpunit/phpunit": "^9.5.10",
+        "ssddanbrown/asserthtml": "^1.0.1"
     },
     "config": {
         "optimize-autoloader": true,

@@ -14,8 +14,7 @@ class TransactionTest extends TestCase
         $expectedDate = Carbon::now()->subMonth()->startOfMonth()->format('Y-m-d');
         $resp = $this->whileLoggedIn()->get("/transactions/create");
 
-        $respData = $resp->getContent();
-        $this->assertMatchesRegularExpression('/name="transacted_at".*?value="' . $expectedDate . '".*?>/s', $respData);
+        $this->withHtml($resp)->assertFieldHasValue('transacted_at', $expectedDate);
     }
 
     public function test_edit_shows_correct_category()
@@ -24,9 +23,9 @@ class TransactionTest extends TestCase
         $transaction = Transaction::factory()->create();
         $categoryC = Category::factory()->create();
 
-        $resp = $this->whileLoggedIn()->get("/transactions/{$transaction->id}/edit");
-        $resp->assertSee('<option value="' . $transaction->category_id . '"  selected', false);
-        $resp->assertDontSee('<option value="' . $categoryA->id . '"  selected', false);
-        $resp->assertDontSee('<option value="' . $categoryC->id . '"  selected', false);
+        $html = $this->withHtml($this->whileLoggedIn()->get("/transactions/{$transaction->id}/edit"));
+        $html->assertFieldHasSelected('category_id', $transaction->category_id);
+        $html->assertFieldNotHasSelected('category_id', $categoryA->id);
+        $html->assertFieldNotHasSelected('category_id', $categoryC->id);
     }
 }

@@ -12,7 +12,8 @@ class CategoryTest extends TestCase
     {
         $category = Category::factory()->create(['name' => 'Donkey & Cat']);
         $resp = $this->whileLoggedIn()->get("/categories/{$category->id}/edit");
-        $resp->assertSee('value="Donkey &amp; Cat"', false);
+        $this->withHtml($resp)->assertFieldHasValue('name', 'Donkey & Cat');
+        $this->withHtml($resp)->assertFieldNotHasValue('name', 'Donkey &amp; Cat');
     }
 
 }
