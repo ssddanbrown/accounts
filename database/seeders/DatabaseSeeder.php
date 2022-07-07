@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        Transaction::factory(100)->create();
+        $categories = Category::factory(5)->create();
+
+        /** @var Category $category */
+        foreach ($categories as $category) {
+            Transaction::factory(50)->create(['category_id' => $category->id]);
+        }
     }
 }

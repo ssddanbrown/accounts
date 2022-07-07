@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This should be executed from the top-level DOMAH install folder.
+# This should be executed from the top-level install folder.
 # (Where this script is by default)
 
 php artisan down && \
