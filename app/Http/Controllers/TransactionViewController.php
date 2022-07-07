@@ -50,7 +50,7 @@ class TransactionViewController extends Controller
             ->toArray();
 
         return view('transactions.views.month', [
-            'transactions' => $query->paginate(),
+            'transactions' => $query->clone()->paginate(50),
             'totals' => $this->getTotals($query),
             'months' => $months,
             'yearMonth' => $yearMonth,
