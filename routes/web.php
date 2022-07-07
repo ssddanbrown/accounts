@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransactionViewController;
 
@@ -65,4 +66,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
     Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/categories/{category}', [CategoryController::class, 'delete'])->name('category.delete');
+
+    // Reports
+    Route::get('/report/summary', [ReportController::class, 'summary'])->name('report.summary');
 });

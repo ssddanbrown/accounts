@@ -5,6 +5,7 @@
             @auth
                 <a class="btn btn-link" href="{{ route('dashboard') }}">Home</a>
                 <a class="btn btn-link" href="{{ route('transaction-view.month', ['yearMonth' => 'now']) }}">Transactions</a>
+                <a class="btn btn-link" href="{{ route('report.summary') }}">Report</a>
                 <a class="btn btn-link" href="{{ route('category.index') }}">Categories</a>
                 <a class="btn btn-link" href="{{ route('note.index') }}">Notes</a>
                 <a class="btn btn-link" href="{{ route('logout') }}">Logout</a>

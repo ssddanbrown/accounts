@@ -2,9 +2,10 @@
 
 namespace App\Util;
 
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\HtmlString;
 
-class MoneyFormat
+class MoneyFormat implements Htmlable
 {
     protected int $value;
 
@@ -29,4 +30,8 @@ class MoneyFormat
         return number_format($this->value / 100, 2, '.', '');
     }
 
+    public function toHtml()
+    {
+        return $this->html();
+    }
 }
