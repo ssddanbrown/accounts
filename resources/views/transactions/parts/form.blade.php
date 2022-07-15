@@ -13,4 +13,21 @@
     </div>
 </div>
 
+<script>
+    // Highlight specific inputs while their input values match their original
+    // values, since changes are generally expected in these inputs.
+    const inputsToTrack = ['transacted_at', 'value', 'description', 'notes'];
+    for (const inputName of inputsToTrack) {
+        const input = document.querySelector(`input[name="${inputName}"], textarea[name="${inputName}"]`);
+        const originalVal = input.value;
+        if (originalVal) {
+            input.classList.add('is-invalid');
+        }
+
+        input.addEventListener('change', () => {
+            input.classList.toggle('is-invalid', input.value === originalVal);
+        });
+    }
+</script>
+
 <x-transacted-with-data-list id="transacted-with-list"/>
