@@ -95,3 +95,7 @@ label {
 .toggle-block-content.dropdown-menu {
     max-width: 200px;
 }
+
+.show-whitespace {
+    white-space: pre-wrap;
+}
