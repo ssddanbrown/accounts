@@ -24,6 +24,7 @@ class Category extends Model
     public static function selectOptionsList(): array
     {
         return [null => '- None -'] + static::query()->select(['id', 'name', 'short_name'])
+            ->orderBy('name')
             ->get()
             ->keyBy('id')
             ->map(fn(Category $category) => $category->short_name . " " . $category->name)
