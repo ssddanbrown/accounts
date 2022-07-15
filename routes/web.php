@@ -36,6 +36,8 @@ Route::group(['middleware' => 'auth'], function() {
     // Transaction Views
     Route::get('/transactions/month/{yearMonth}', [TransactionViewController::class, 'month'])->name('transaction-view.month');
     Route::get('/transactions/payee/{payee}', [TransactionViewController::class, 'payee'])->name('transaction-view.payee');
+    Route::get('/transactions/category/{category}', [TransactionViewController::class, 'category'])->name('transaction-view.category');
+    Route::get('/transactions/search', [TransactionViewController::class, 'search'])->name('transaction-view.search');
 
     // Transactions
     Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transaction.create');

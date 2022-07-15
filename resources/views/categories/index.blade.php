@@ -15,7 +15,8 @@
         @foreach($categories as $category)
             <div class="card mb-3">
                 <div class="card-body">
-                    <div class="small text-muted float-end">
+                    <div class="small text-muted float-end gap-2 d-inline-flex">
+                        <a href="{{ route('transaction-view.category', compact('category')) }}">Transactions</a>
                         <a href="{{ route('category.edit', compact('category')) }}">Edit</a>
                     </div>
                     <p class="mb-1">{{ $category->short_name }} &nbsp; {{ $category->name }}</p>

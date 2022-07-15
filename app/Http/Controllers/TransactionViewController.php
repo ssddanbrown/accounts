@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -65,6 +66,34 @@ class TransactionViewController extends Controller
             'transactions' => $query->clone()->paginate(),
             'totals' => $this->getTotals($query),
             'payee' => $payee,
+        ]);
+    }
+
+    public function category(Category $category)
+    {
+        $query = $this->getBaseQuery()->where('category_id', '=', $category->id);
+
+        return view('transactions.views.category', [
+            'transactions' => $query->clone()->paginate(),
+            'totals' => $this->getTotals($query),
+            'category' => $category,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->get('query');
+        $likeTerm = '%' . $searchTerm . '%';
+
+        $query = $this->getBaseQuery()
+            ->where('transacted_with', 'like', $likeTerm)
+            ->orWhere('description', 'like', $likeTerm)
+            ->orWhere('notes', 'like', $likeTerm);
+
+        return view('transactions.views.search', [
+            'transactions' => $query->clone()->paginate(),
+            'totals' => $this->getTotals($query),
+            'searchTerm' => $searchTerm,
         ]);
     }
 }

@@ -25,7 +25,8 @@
                    href="{{ route('transaction.show', compact('transaction')) }}">#{{ $transaction->id }}</a>
             </td>
             <td class="small text-center" title="{{ $transaction->category->name ?? '' }}">
-                {{ $transaction->category->short_name ?? '' }}
+                <a href="{{ route('transaction-view.category', ['category' => $transaction->category]) }}"
+                   class="text-muted">{{ $transaction->category->short_name ?? '' }}</a>
             </td>
             <td class="small">
                 <a href="{{ route('transaction-view.payee', ['payee' => $transaction->transacted_with]) }}"

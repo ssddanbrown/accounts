@@ -12,5 +12,11 @@
                 <a class="btn btn-link" href="{{ route('logout') }}">Logout</a>
             @endauth
         </div>
+        <div class="align-self-center ms-auto">
+            <form action="{{ route('transaction-view.search') }}" method="get">
+                <input type="text" name="query" placeholder="Search transactions" class="form-control">
+                <button style="display: none;">Search</button>
+            </form>
+        </div>
     </nav>
 </div>
