@@ -62,7 +62,7 @@ class TransactionViewController extends Controller
         $query = $this->getBaseQuery()->where('transacted_with', '=', $payee);
 
         return view('transactions.views.payee', [
-            'transactions' => $query->paginate(),
+            'transactions' => $query->clone()->paginate(),
             'totals' => $this->getTotals($query),
             'payee' => $payee,
         ]);
