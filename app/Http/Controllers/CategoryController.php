@@ -15,6 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::query()->orderBy('name', 'asc')->get();
+
         return view('categories.index', compact('categories'));
     }
 
@@ -33,7 +34,7 @@ class CategoryController extends Controller
         $category = new Category($validated);
         $category->save();
 
-        $this->showSuccessMessage("Category created!");
+        $this->showSuccessMessage('Category created!');
 
         return redirect()->route('category.index');
     }
@@ -48,18 +49,18 @@ class CategoryController extends Controller
         $validated = $this->validate($request, $this->rules);
 
         $category->fill($validated)->save();
-        $this->showSuccessMessage("Category updated!");
+        $this->showSuccessMessage('Category updated!');
 
         return redirect()->route('category.index');
     }
 
     public function delete(Category $category)
     {
-
         $category->transactions()->update(['category_id' => null]);
         $category->delete();
 
-        $this->showSuccessMessage("Category deleted!");
+        $this->showSuccessMessage('Category deleted!');
+
         return redirect()->route('category.index');
     }
 }

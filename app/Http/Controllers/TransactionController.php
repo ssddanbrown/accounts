@@ -15,7 +15,7 @@ class TransactionController extends Controller
         'value' => ['required', 'numeric'],
         'description' => ['nullable', 'string'],
         'notes' => ['nullable', 'string'],
-        'category_id' => ['nullable', 'int', 'exists:categories,id']
+        'category_id' => ['nullable', 'int', 'exists:categories,id'],
     ];
 
     public function create(Request $request)
@@ -38,7 +38,7 @@ class TransactionController extends Controller
             $attachmentStore->storeForTransaction($transaction, $attachment);
         }
 
-        $this->showSuccessMessage("Transaction created!");
+        $this->showSuccessMessage('Transaction created!');
 
         return redirect()->route('transaction.show', compact('transaction'));
     }
@@ -58,7 +58,7 @@ class TransactionController extends Controller
         $validated = $this->validate($request, $this->rules);
 
         $transaction->fill($validated)->save();
-        $this->showSuccessMessage("Transaction updated!");
+        $this->showSuccessMessage('Transaction updated!');
 
         return redirect()->route('transaction.show', compact('transaction'));
     }
@@ -70,7 +70,8 @@ class TransactionController extends Controller
         }
         $transaction->delete();
 
-        $this->showSuccessMessage("Transaction deleted!");
+        $this->showSuccessMessage('Transaction deleted!');
+
         return redirect()->route('dashboard');
     }
 

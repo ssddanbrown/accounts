@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('short_name', 10)->default('🏷️');
         });
 
-        Category::query()->chunk(100, function($categories) {
+        Category::query()->chunk(100, function ($categories) {
             foreach ($categories as $category) {
                 $parts = explode(' ', $category->name, 2);
                 $category->name = $parts[1] ?? $parts[0];

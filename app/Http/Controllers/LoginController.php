@@ -21,7 +21,7 @@ class LoginController extends Controller
         ]);
 
         $user = User::query()->where('email', '=', $validated['email'])->first();
-        if (!$user || !auth()->attempt($validated)) {
+        if (! $user || ! auth()->attempt($validated)) {
             throw ValidationException::withMessages([
                 'email' => ['User not found or password is incorrect'],
             ]);

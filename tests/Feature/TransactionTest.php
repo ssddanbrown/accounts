@@ -12,7 +12,7 @@ class TransactionTest extends TestCase
     public function test_create_form_defaults_date_to_last_month()
     {
         $expectedDate = Carbon::now()->subMonth()->startOfMonth()->format('Y-m-d');
-        $resp = $this->whileLoggedIn()->get("/transactions/create");
+        $resp = $this->whileLoggedIn()->get('/transactions/create');
 
         $this->withHtml($resp)->assertFieldHasValue('transacted_at', $expectedDate);
     }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
-use Illuminate\Http\Request;
 
 class PayeeController extends Controller
 {
@@ -17,7 +16,7 @@ class PayeeController extends Controller
             ->pluck('transacted_with');
 
         return view('payees.index', [
-            'payees' => $payees
+            'payees' => $payees,
         ]);
     }
 }

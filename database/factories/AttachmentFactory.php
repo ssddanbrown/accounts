@@ -18,7 +18,8 @@ class AttachmentFactory extends Factory
      */
     public function definition()
     {
-        $name = Str::slug(implode('-', $this->faker->words(3))) . '.txt';
+        $name = Str::slug(implode('-', $this->faker->words(3))).'.txt';
+
         return [
             'name' => $name,
             'file' => $name,

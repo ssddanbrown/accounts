@@ -17,11 +17,12 @@ class MoneyFormat implements Htmlable
     public function html(): HtmlString
     {
         if ($this->value === 0) {
-            return new HtmlString("<span class=\"money text-muted\">-</span>");
+            return new HtmlString('<span class="money text-muted">-</span>');
         }
         $formattedVal = number_format(abs($this->value / 100), 2, '.', ',');
         $sign = $this->value < 0 ? '-' : '+';
         $class = $this->value < 0 ? 'danger' : 'success';
+
         return new HtmlString("<span class=\"money text-{$class}\">{$sign}£{$formattedVal}</span>");
     }
 

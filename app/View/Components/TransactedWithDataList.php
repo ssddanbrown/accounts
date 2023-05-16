@@ -7,7 +7,6 @@ use Illuminate\View\Component;
 
 class TransactedWithDataList extends Component
 {
-
     public string $id;
 
     public function __construct($id)

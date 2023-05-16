@@ -38,6 +38,7 @@ class Attachment extends Model
         }
 
         $number = number_format($size, 2, '.', ',');
+
         return "{$number} {$format}";
     }
 

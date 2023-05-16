@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 class TransactionViewController extends Controller
 {
-
     protected function getBaseQuery(): Builder
     {
         return Transaction::query()
@@ -23,6 +22,7 @@ class TransactionViewController extends Controller
     {
         $in = $query->clone()->where('value', '>', 0)->sum('value');
         $out = $query->clone()->where('value', '<', 0)->sum('value');
+
         return [
             'in' => $in,
             'out' => $out,
@@ -83,7 +83,7 @@ class TransactionViewController extends Controller
     public function search(Request $request)
     {
         $searchTerm = $request->get('query');
-        $likeTerm = '%' . $searchTerm . '%';
+        $likeTerm = '%'.$searchTerm.'%';
 
         $query = $this->getBaseQuery()
             ->where('transacted_with', 'like', $likeTerm)

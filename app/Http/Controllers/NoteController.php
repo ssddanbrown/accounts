@@ -14,6 +14,7 @@ class NoteController extends Controller
     public function index()
     {
         $notes = Note::query()->orderBy('created_at', 'desc')->get();
+
         return view('notes.index', compact('notes'));
     }
 
@@ -32,7 +33,7 @@ class NoteController extends Controller
         $note = new Note($validated);
         $note->save();
 
-        $this->showSuccessMessage("Note created!");
+        $this->showSuccessMessage('Note created!');
 
         return redirect()->route('note.index');
     }
@@ -47,7 +48,7 @@ class NoteController extends Controller
         $validated = $this->validate($request, $this->rules);
 
         $note->fill($validated)->save();
-        $this->showSuccessMessage("Note updated!");
+        $this->showSuccessMessage('Note updated!');
 
         return redirect()->route('note.index');
     }
@@ -56,7 +57,8 @@ class NoteController extends Controller
     {
         $note->delete();
 
-        $this->showSuccessMessage("Note deleted!");
+        $this->showSuccessMessage('Note deleted!');
+
         return redirect()->route('note.index');
     }
 }

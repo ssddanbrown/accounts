@@ -18,6 +18,7 @@ class TransactionFactory extends Factory
     public function definition()
     {
         $value = rand(0, 1000000) - 500000;
+
         return [
             'transacted_at' => now()->subDays(random_int(1, 1000)),
             'transacted_with' => $this->faker->company,

@@ -19,13 +19,13 @@ class ReportController extends Controller
         $dateTo = Carbon::createFromFormat('Y-m', $yearMonthTo)->endOfMonth();
 
         $categorisedTransactions = Transaction::query()->select([
-                'category_id',
-                DB::raw('categories.short_name || \' \' || categories.name as category_name'),
-                DB::raw('count(transactions.id) as transaction_count'),
-                DB::raw('sum(value) as value'),
-                DB::raw('sum(case when value > 0 then value else 0 end) as income'),
-                DB::raw('sum(case when value < 0 then value else 0 end) as outcome'),
-            ])
+            'category_id',
+            DB::raw('categories.short_name || \' \' || categories.name as category_name'),
+            DB::raw('count(transactions.id) as transaction_count'),
+            DB::raw('sum(value) as value'),
+            DB::raw('sum(case when value > 0 then value else 0 end) as income'),
+            DB::raw('sum(case when value < 0 then value else 0 end) as outcome'),
+        ])
             ->where('transacted_at', '>=', $dateFrom)
             ->where('transacted_at', '<=', $dateTo)
             ->groupBy('category_id')

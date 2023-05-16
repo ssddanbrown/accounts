@@ -45,26 +45,28 @@ class ResetUserPasswordCommand extends Command
         $userEmail = $this->ask('Enter the email of the user you want to reset the password for');
         /** @var User $user */
         $user = User::query()->where('email', '=', $userEmail)->first();
-        if (empty($userEmail) || !$user) {
-            $this->error("An email for an existing user needs to be provided.");
+        if (empty($userEmail) || ! $user) {
+            $this->error('An email for an existing user needs to be provided.');
+
             return 1;
         }
 
         $this->line("User found with name \"{$user->name}\".");
-        $newPassword = $this->secret("Enter a new password for this user");
+        $newPassword = $this->secret('Enter a new password for this user');
         try {
             Validator::validate(['password' => $newPassword], ['password' => ['required', Password::default()]]);
         } catch (ValidationException $exception) {
-            $this->error("The provided password was invalid");
+            $this->error('The provided password was invalid');
             $errors = $exception->validator->errors();
             $this->error(implode("\n", $errors->all()));
+
             return 1;
         }
 
         $user->password = Hash::make($newPassword);
         $user->save();
 
-        $this->line("User password updated!");
+        $this->line('User password updated!');
 
         return 0;
     }

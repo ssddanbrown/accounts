@@ -10,11 +10,10 @@ use Illuminate\Support\Facades\Storage;
 
 class AttachmentController extends Controller
 {
-
     public function store(Request $request, AttachmentStore $store, Transaction $transaction)
     {
         $this->validate($request, [
-            'file' => ['required', 'file']
+            'file' => ['required', 'file'],
         ]);
 
         $file = $request->file('file');
@@ -31,6 +30,7 @@ class AttachmentController extends Controller
         if ($request->query('download') === 'true') {
             return Storage::download($attachment->file);
         }
+
         return Storage::response($attachment->file);
     }
 
@@ -41,7 +41,7 @@ class AttachmentController extends Controller
         ]);
 
         $attachment->fill($validated)->save();
-        $this->showSuccessMessage("Attachment updated!");
+        $this->showSuccessMessage('Attachment updated!');
 
         return redirect()->route('transaction.show', [
             'transaction' => $attachment->transaction,
@@ -52,7 +52,7 @@ class AttachmentController extends Controller
     {
         $attachment->deleteWithFile();
 
-        $this->showSuccessMessage("Attachment deleted!");
+        $this->showSuccessMessage('Attachment deleted!');
 
         return redirect()->route('transaction.show', [
             'transaction' => $attachment->transaction,
