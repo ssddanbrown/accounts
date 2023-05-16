@@ -20,7 +20,7 @@
         "nunomaduro/collision": "^7.0",
         "nunomaduro/larastan": "^2.4",
         "phpunit/phpunit": "^10.0",
-        "ssddanbrown/asserthtml": "^1.0.1"
+        "ssddanbrown/asserthtml": "^3.0"
     },
     "config": {
         "optimize-autoloader": true,
