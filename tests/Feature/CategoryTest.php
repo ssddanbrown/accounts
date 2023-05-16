@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
-    public function test_category_edit_input_does_not_show_names_encoded()
+    public function test_category_edit_input_does_not_show_names_encoded(): void
     {
         $category = Category::factory()->create(['name' => 'Donkey & Cat']);
         $resp = $this->whileLoggedIn()->get("/categories/{$category->id}/edit");

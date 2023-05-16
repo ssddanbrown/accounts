@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $categories = Category::factory(5)->create();
 

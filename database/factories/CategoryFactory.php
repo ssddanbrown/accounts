@@ -14,7 +14,7 @@ class CategoryFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         $name = $this->faker->country();
 

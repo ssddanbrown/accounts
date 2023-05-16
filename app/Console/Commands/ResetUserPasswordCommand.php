@@ -40,7 +40,7 @@ class ResetUserPasswordCommand extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $userEmail = $this->ask('Enter the email of the user you want to reset the password for');
         /** @var User $user */

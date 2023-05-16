@@ -15,7 +15,7 @@ class TransactionFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         $value = rand(0, 1000000) - 500000;
 

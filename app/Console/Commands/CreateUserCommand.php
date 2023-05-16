@@ -41,7 +41,7 @@ class CreateUserCommand extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $details = [
             'name' => $this->ask('Enter an name for this user'),

@@ -12,7 +12,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         DB::table('transactions')
             ->update([
@@ -29,7 +29,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('transactions', function (Blueprint $table) {
             $table->integer('vat', false, false)->default(0);
