@@ -16,7 +16,7 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->country;
+        $name = $this->faker->country();
 
         return [
             'short_name' => substr($name, 0, 1),
