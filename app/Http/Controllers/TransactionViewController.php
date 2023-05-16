@@ -86,13 +86,17 @@ class TransactionViewController extends Controller
         $searchTerm = $request->get('query');
         $likeTerm = '%'.$searchTerm.'%';
 
-        $query = $this->getBaseQuery()
-            ->where('transacted_with', 'like', $likeTerm)
-            ->orWhere('description', 'like', $likeTerm)
-            ->orWhere('notes', 'like', $likeTerm);
+        $query = $this->getBaseQuery()->where(function (Builder $query) use ($likeTerm) {
+            $query->where('transacted_with', 'like', $likeTerm)
+                ->orWhere('description', 'like', $likeTerm)
+                ->orWhere('notes', 'like', $likeTerm);
+        });
+
+        $transactions = $query->clone()->paginate();
+        $transactions->appends(['query' => $searchTerm]);
 
         return view('transactions.views.search', [
-            'transactions' => $query->clone()->paginate(),
+            'transactions' => $transactions,
             'totals' => $this->getTotals($query),
             'searchTerm' => $searchTerm,
         ]);

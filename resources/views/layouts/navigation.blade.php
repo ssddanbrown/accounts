@@ -15,7 +15,11 @@
         <div class="align-self-center ms-auto">
             @auth
             <form action="{{ route('transaction-view.search') }}" method="get">
-                <input type="text" name="query" placeholder="Search transactions" class="form-control">
+                <input type="text"
+                       name="query"
+                       placeholder="Search transactions"
+                       value="{{ request()->query('query') ?? '' }}"
+                       class="form-control">
                 <button style="display: none;">Search</button>
             </form>
             @endauth
