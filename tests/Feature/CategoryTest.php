@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Models\Category;
 use Tests\TestCase;
 
-class CategoryTest extends TestCase
+final class CategoryTest extends TestCase
 {
     public function test_category_edit_input_does_not_show_names_encoded(): void
     {
