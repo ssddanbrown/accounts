@@ -9,7 +9,6 @@
         "ext-simplexml": "*",
         "blade-ui-kit/blade-heroicons": "^1.3",
         "doctrine/dbal": "^3.3",
-        "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^9.0",
         "laravel/tinker": "^v2.7"
