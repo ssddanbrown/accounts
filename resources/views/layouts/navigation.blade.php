@@ -13,10 +13,12 @@
             @endauth
         </div>
         <div class="align-self-center ms-auto">
+            @auth
             <form action="{{ route('transaction-view.search') }}" method="get">
                 <input type="text" name="query" placeholder="Search transactions" class="form-control">
                 <button style="display: none;">Search</button>
             </form>
+            @endauth
         </div>
     </nav>
 </div>
