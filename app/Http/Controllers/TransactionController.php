@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use App\Services\AttachmentStore;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\View\View;
 
 class TransactionController extends Controller
 {
@@ -15,10 +17,10 @@ class TransactionController extends Controller
         'value' => ['required', 'numeric'],
         'description' => ['nullable', 'string'],
         'notes' => ['nullable', 'string'],
-        'category_id' => ['nullable', 'int', 'exists:categories,id']
+        'category_id' => ['nullable', 'int', 'exists:categories,id'],
     ];
 
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $modelId = $request->get('model');
         $model = $modelId ? Transaction::query()->findOrFail($modelId) : null;
@@ -26,7 +28,7 @@ class TransactionController extends Controller
         return view('transactions.create', compact('model'));
     }
 
-    public function store(Request $request, AttachmentStore $attachmentStore)
+    public function store(Request $request, AttachmentStore $attachmentStore): RedirectResponse
     {
         $validated = $this->validate($request, $this->rules);
 
@@ -38,43 +40,44 @@ class TransactionController extends Controller
             $attachmentStore->storeForTransaction($transaction, $attachment);
         }
 
-        $this->showSuccessMessage("Transaction created!");
+        $this->showSuccessMessage('Transaction created!');
 
         return redirect()->route('transaction.show', compact('transaction'));
     }
 
-    public function show(Transaction $transaction)
+    public function show(Transaction $transaction): View
     {
         return view('transactions.show', compact('transaction'));
     }
 
-    public function edit(Transaction $transaction)
+    public function edit(Transaction $transaction): View
     {
         return view('transactions.edit', compact('transaction'));
     }
 
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, Transaction $transaction): RedirectResponse
     {
         $validated = $this->validate($request, $this->rules);
 
         $transaction->fill($validated)->save();
-        $this->showSuccessMessage("Transaction updated!");
+        $this->showSuccessMessage('Transaction updated!');
 
         return redirect()->route('transaction.show', compact('transaction'));
     }
 
-    public function delete(Transaction $transaction)
+    public function delete(Transaction $transaction): RedirectResponse
     {
         foreach ($transaction->attachments as $attachment) {
             $attachment->deleteWithFile();
         }
         $transaction->delete();
 
-        $this->showSuccessMessage("Transaction deleted!");
+        $this->showSuccessMessage('Transaction deleted!');
+
         return redirect()->route('dashboard');
     }
 
-    public function copy(Transaction $transaction)
+    public function copy(Transaction $transaction): RedirectResponse
     {
         return redirect()->route('transaction.create', ['model' => $transaction->id]);
     }

@@ -9,15 +9,15 @@ use Tests\TestCase;
 
 class TransactionTest extends TestCase
 {
-    public function test_create_form_defaults_date_to_last_month()
+    public function test_create_form_defaults_date_to_last_month(): void
     {
         $expectedDate = Carbon::now()->subMonth()->startOfMonth()->format('Y-m-d');
-        $resp = $this->whileLoggedIn()->get("/transactions/create");
+        $resp = $this->whileLoggedIn()->get('/transactions/create');
 
         $this->withHtml($resp)->assertFieldHasValue('transacted_at', $expectedDate);
     }
 
-    public function test_edit_shows_correct_category()
+    public function test_edit_shows_correct_category(): void
     {
         $categoryA = Category::factory()->create();
         $transaction = Transaction::factory()->create();

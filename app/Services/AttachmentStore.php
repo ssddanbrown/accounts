@@ -10,14 +10,13 @@ use Illuminate\Support\Str;
 
 class AttachmentStore
 {
-
     public function storeForTransaction(Transaction $transaction, UploadedFile $file): Attachment
     {
         $fileName = $file->getClientOriginalName();
         $fileStorageName = $fileName;
         $parentPath = "attachments/{$transaction->id}/";
         while (Storage::exists("$parentPath/{$fileStorageName}")) {
-            $fileStorageName = Str::random(3) . '-' . $fileStorageName;
+            $fileStorageName = Str::random(3).'-'.$fileStorageName;
         }
 
         $path = $file->storeAs("attachments/{$transaction->id}", $fileStorageName);
@@ -30,7 +29,7 @@ class AttachmentStore
         ]);
 
         $transaction->attachments()->save($attachment);
+
         return $attachment;
     }
-
 }

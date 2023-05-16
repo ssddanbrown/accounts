@@ -21,12 +21,11 @@ use App\Http\Controllers\TransactionViewController;
 |
 */
 
-
 // Auth
 Route::get('/login', [LoginController::class, 'show'])->name('login.show');
 Route::post('/login', [LoginController::class, 'attempt'])->name('login.attempt');
 
-Route::group(['middleware' => 'auth'], function() {
+Route::middleware('auth')->group(function () {
     // Auth
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 

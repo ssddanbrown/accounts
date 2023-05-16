@@ -16,6 +16,7 @@ abstract class TestCase extends BaseTestCase
     protected function whileLoggedIn(): self
     {
         $user = User::factory()->create();
+
         return $this->actingAs($user);
     }
 }

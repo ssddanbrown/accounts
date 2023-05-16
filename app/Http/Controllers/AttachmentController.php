@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Attachment;
 use App\Models\Transaction;
 use App\Services\AttachmentStore;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class AttachmentController extends Controller
 {
-
-    public function store(Request $request, AttachmentStore $store, Transaction $transaction)
+    public function store(Request $request, AttachmentStore $store, Transaction $transaction): RedirectResponse
     {
         $this->validate($request, [
-            'file' => ['required', 'file']
+            'file' => ['required', 'file'],
         ]);
 
         $file = $request->file('file');
@@ -31,28 +31,29 @@ class AttachmentController extends Controller
         if ($request->query('download') === 'true') {
             return Storage::download($attachment->file);
         }
+
         return Storage::response($attachment->file);
     }
 
-    public function update(Request $request, Attachment $attachment)
+    public function update(Request $request, Attachment $attachment): RedirectResponse
     {
         $validated = $this->validate($request, [
             'name' => ['required', 'string'],
         ]);
 
         $attachment->fill($validated)->save();
-        $this->showSuccessMessage("Attachment updated!");
+        $this->showSuccessMessage('Attachment updated!');
 
         return redirect()->route('transaction.show', [
             'transaction' => $attachment->transaction,
         ]);
     }
 
-    public function delete(Attachment $attachment)
+    public function delete(Attachment $attachment): RedirectResponse
     {
         $attachment->deleteWithFile();
 
-        $this->showSuccessMessage("Attachment deleted!");
+        $this->showSuccessMessage('Attachment deleted!');
 
         return redirect()->route('transaction.show', [
             'transaction' => $attachment->transaction,

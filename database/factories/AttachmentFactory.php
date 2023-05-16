@@ -13,12 +13,11 @@ class AttachmentFactory extends Factory
 {
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
-    public function definition()
+    public function definition(): array
     {
-        $name = Str::slug(implode('-', $this->faker->words(3))) . '.txt';
+        $name = Str::slug(implode('-', $this->faker->words(3))).'.txt';
+
         return [
             'name' => $name,
             'file' => $name,

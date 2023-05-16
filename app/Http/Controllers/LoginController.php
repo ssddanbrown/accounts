@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class LoginController extends Controller
 {
-    public function show()
+    public function show(): View
     {
         return view('login.show');
     }
 
-    public function attempt(Request $request)
+    public function attempt(Request $request): RedirectResponse
     {
         $validated = $this->validate($request, [
             'email' => ['required', 'email'],
@@ -21,7 +23,7 @@ class LoginController extends Controller
         ]);
 
         $user = User::query()->where('email', '=', $validated['email'])->first();
-        if (!$user || !auth()->attempt($validated)) {
+        if (! $user || ! auth()->attempt($validated)) {
             throw ValidationException::withMessages([
                 'email' => ['User not found or password is incorrect'],
             ]);
@@ -30,7 +32,7 @@ class LoginController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
         auth()->logout();
         session()->invalidate();

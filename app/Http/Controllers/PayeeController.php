@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class PayeeController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $payees = Transaction::query()->toBase()
             ->select('transacted_with')
@@ -17,7 +17,7 @@ class PayeeController extends Controller
             ->pluck('transacted_with');
 
         return view('payees.index', [
-            'payees' => $payees
+            'payees' => $payees,
         ]);
     }
 }

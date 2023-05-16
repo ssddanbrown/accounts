@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class NoteController extends Controller
 {
@@ -11,13 +13,14 @@ class NoteController extends Controller
         'text' => ['string'],
     ];
 
-    public function index()
+    public function index(): View
     {
         $notes = Note::query()->orderBy('created_at', 'desc')->get();
+
         return view('notes.index', compact('notes'));
     }
 
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $modelId = $request->get('model');
         $model = $modelId ? Note::query()->findOrFail($modelId) : null;
@@ -25,38 +28,39 @@ class NoteController extends Controller
         return view('notes.create', compact('model'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated = $this->validate($request, $this->rules);
 
         $note = new Note($validated);
         $note->save();
 
-        $this->showSuccessMessage("Note created!");
+        $this->showSuccessMessage('Note created!');
 
         return redirect()->route('note.index');
     }
 
-    public function edit(Note $note)
+    public function edit(Note $note): View
     {
         return view('notes.edit', compact('note'));
     }
 
-    public function update(Request $request, Note $note)
+    public function update(Request $request, Note $note): RedirectResponse
     {
         $validated = $this->validate($request, $this->rules);
 
         $note->fill($validated)->save();
-        $this->showSuccessMessage("Note updated!");
+        $this->showSuccessMessage('Note updated!');
 
         return redirect()->route('note.index');
     }
 
-    public function delete(Note $note)
+    public function delete(Note $note): RedirectResponse
     {
         $note->delete();
 
-        $this->showSuccessMessage("Note deleted!");
+        $this->showSuccessMessage('Note deleted!');
+
         return redirect()->route('note.index');
     }
 }

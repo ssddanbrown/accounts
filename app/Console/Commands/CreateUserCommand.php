@@ -38,15 +38,13 @@ class CreateUserCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $details = [
-            'name' => $this->ask("Enter an name for this user"),
-            'email' => $this->ask("Enter an email address for this user"),
-            'password' => $this->secret("Enter a password for this user"),
+            'name' => $this->ask('Enter an name for this user'),
+            'email' => $this->ask('Enter an email address for this user'),
+            'password' => $this->secret('Enter a password for this user'),
         ];
 
         try {
@@ -56,9 +54,10 @@ class CreateUserCommand extends Command
                 'password' => ['required', Password::default()],
             ]);
         } catch (ValidationException $exception) {
-            $this->error("User details provided were invalid:");
+            $this->error('User details provided were invalid:');
             $errors = $exception->validator->errors();
             $this->error(implode("\n", $errors->all()));
+
             return 1;
         }
 

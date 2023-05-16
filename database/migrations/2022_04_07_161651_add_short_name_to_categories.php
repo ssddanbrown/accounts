@@ -9,16 +9,14 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('categories', function (Blueprint $table) {
             $table->string('short_name', 10)->default('🏷️');
         });
 
-        Category::query()->chunk(100, function($categories) {
+        Category::query()->chunk(100, function ($categories) {
             foreach ($categories as $category) {
                 $parts = explode(' ', $category->name, 2);
                 $category->name = $parts[1] ?? $parts[0];
@@ -30,10 +28,8 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('categories', function (Blueprint $table) {
             $table->dropColumn('short_name');

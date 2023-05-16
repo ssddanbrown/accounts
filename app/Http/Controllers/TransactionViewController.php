@@ -7,10 +7,10 @@ use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class TransactionViewController extends Controller
 {
-
     protected function getBaseQuery(): Builder
     {
         return Transaction::query()
@@ -23,6 +23,7 @@ class TransactionViewController extends Controller
     {
         $in = $query->clone()->where('value', '>', 0)->sum('value');
         $out = $query->clone()->where('value', '<', 0)->sum('value');
+
         return [
             'in' => $in,
             'out' => $out,
@@ -58,7 +59,7 @@ class TransactionViewController extends Controller
         ]);
     }
 
-    public function payee(string $payee)
+    public function payee(string $payee): View
     {
         $query = $this->getBaseQuery()->where('transacted_with', '=', $payee);
 
@@ -69,7 +70,7 @@ class TransactionViewController extends Controller
         ]);
     }
 
-    public function category(Category $category)
+    public function category(Category $category): View
     {
         $query = $this->getBaseQuery()->where('category_id', '=', $category->id);
 
@@ -80,10 +81,10 @@ class TransactionViewController extends Controller
         ]);
     }
 
-    public function search(Request $request)
+    public function search(Request $request): View
     {
         $searchTerm = $request->get('query');
-        $likeTerm = '%' . $searchTerm . '%';
+        $likeTerm = '%'.$searchTerm.'%';
 
         $query = $this->getBaseQuery()
             ->where('transacted_with', 'like', $likeTerm)

@@ -27,7 +27,7 @@ class Category extends Model
             ->orderBy('name')
             ->get()
             ->keyBy('id')
-            ->map(fn(Category $category) => $category->short_name . " " . $category->name)
+            ->map(fn (Category $category) => $category->short_name.' '.$category->name)
             ->toArray();
     }
 }

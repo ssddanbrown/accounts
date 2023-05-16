@@ -11,12 +11,11 @@ class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
-     *
-     * @return array
      */
-    public function definition()
+    public function definition(): array
     {
-        $name = $this->faker->country;
+        $name = $this->faker->country();
+
         return [
             'short_name' => substr($name, 0, 1),
             'name' => $name,
