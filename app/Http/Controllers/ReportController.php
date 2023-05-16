@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
-    public function summary(Request $request)
+    public function summary(Request $request): View
     {
         $lastMonth = Carbon::now()->subMonth()->format('Y-m');
         $yearMonthFrom = $request->get('from', $lastMonth);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Models\Category;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -58,7 +59,7 @@ class TransactionViewController extends Controller
         ]);
     }
 
-    public function payee(string $payee)
+    public function payee(string $payee): View
     {
         $query = $this->getBaseQuery()->where('transacted_with', '=', $payee);
 
@@ -69,7 +70,7 @@ class TransactionViewController extends Controller
         ]);
     }
 
-    public function category(Category $category)
+    public function category(Category $category): View
     {
         $query = $this->getBaseQuery()->where('category_id', '=', $category->id);
 
@@ -80,7 +81,7 @@ class TransactionViewController extends Controller
         ]);
     }
 
-    public function search(Request $request)
+    public function search(Request $request): View
     {
         $searchTerm = $request->get('query');
         $likeTerm = '%'.$searchTerm.'%';

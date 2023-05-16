@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Models\Transaction;
 
 class PayeeController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $payees = Transaction::query()->toBase()
             ->select('transacted_with')

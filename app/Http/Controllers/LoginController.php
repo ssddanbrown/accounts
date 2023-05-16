@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-    public function show()
+    public function show(): View
     {
         return view('login.show');
     }
 
-    public function attempt(Request $request)
+    public function attempt(Request $request): RedirectResponse
     {
         $validated = $this->validate($request, [
             'email' => ['required', 'email'],
@@ -30,7 +32,7 @@ class LoginController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
         auth()->logout();
         session()->invalidate();

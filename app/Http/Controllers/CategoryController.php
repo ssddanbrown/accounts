@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -12,14 +14,14 @@ class CategoryController extends Controller
         'short_name' => ['required', 'string'],
     ];
 
-    public function index()
+    public function index(): View
     {
         $categories = Category::query()->orderBy('name', 'asc')->get();
 
         return view('categories.index', compact('categories'));
     }
 
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $modelId = $request->get('model');
         $model = $modelId ? Category::query()->findOrFail($modelId) : null;
@@ -27,7 +29,7 @@ class CategoryController extends Controller
         return view('categories.create', compact('model'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated = $this->validate($request, $this->rules);
 
@@ -39,12 +41,12 @@ class CategoryController extends Controller
         return redirect()->route('category.index');
     }
 
-    public function edit(Category $category)
+    public function edit(Category $category): View
     {
         return view('categories.edit', compact('category'));
     }
 
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Category $category): RedirectResponse
     {
         $validated = $this->validate($request, $this->rules);
 
@@ -54,7 +56,7 @@ class CategoryController extends Controller
         return redirect()->route('category.index');
     }
 
-    public function delete(Category $category)
+    public function delete(Category $category): RedirectResponse
     {
         $category->transactions()->update(['category_id' => null]);
         $category->delete();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use App\Models\Attachment;
 use App\Models\Transaction;
 use App\Services\AttachmentStore;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AttachmentController extends Controller
 {
-    public function store(Request $request, AttachmentStore $store, Transaction $transaction)
+    public function store(Request $request, AttachmentStore $store, Transaction $transaction): RedirectResponse
     {
         $this->validate($request, [
             'file' => ['required', 'file'],
@@ -34,7 +35,7 @@ class AttachmentController extends Controller
         return Storage::response($attachment->file);
     }
 
-    public function update(Request $request, Attachment $attachment)
+    public function update(Request $request, Attachment $attachment): RedirectResponse
     {
         $validated = $this->validate($request, [
             'name' => ['required', 'string'],
@@ -48,7 +49,7 @@ class AttachmentController extends Controller
         ]);
     }
 
-    public function delete(Attachment $attachment)
+    public function delete(Attachment $attachment): RedirectResponse
     {
         $attachment->deleteWithFile();
 

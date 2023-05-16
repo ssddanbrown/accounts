@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Note;
 use Illuminate\Http\Request;
 
@@ -11,14 +13,14 @@ class NoteController extends Controller
         'text' => ['string'],
     ];
 
-    public function index()
+    public function index(): View
     {
         $notes = Note::query()->orderBy('created_at', 'desc')->get();
 
         return view('notes.index', compact('notes'));
     }
 
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $modelId = $request->get('model');
         $model = $modelId ? Note::query()->findOrFail($modelId) : null;
@@ -26,7 +28,7 @@ class NoteController extends Controller
         return view('notes.create', compact('model'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated = $this->validate($request, $this->rules);
 
@@ -38,12 +40,12 @@ class NoteController extends Controller
         return redirect()->route('note.index');
     }
 
-    public function edit(Note $note)
+    public function edit(Note $note): View
     {
         return view('notes.edit', compact('note'));
     }
 
-    public function update(Request $request, Note $note)
+    public function update(Request $request, Note $note): RedirectResponse
     {
         $validated = $this->validate($request, $this->rules);
 
@@ -53,7 +55,7 @@ class NoteController extends Controller
         return redirect()->route('note.index');
     }
 
-    public function delete(Note $note)
+    public function delete(Note $note): RedirectResponse
     {
         $note->delete();
 
