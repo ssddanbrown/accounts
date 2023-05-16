@@ -21,7 +21,7 @@ class ReportController extends Controller
 
         $categorisedTransactions = Transaction::query()->select([
             'category_id',
-            DB::raw('categories.short_name || \' \' || categories.name as category_name'),
+            DB::raw('categories.name as category_name'),
             DB::raw('count(transactions.id) as transaction_count'),
             DB::raw('sum(value) as value'),
             DB::raw('sum(case when value > 0 then value else 0 end) as income'),

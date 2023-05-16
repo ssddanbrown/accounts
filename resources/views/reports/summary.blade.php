@@ -2,6 +2,11 @@
 
     <div class="container">
 
+        <p class="text-muted">
+            Reports transactions from the start of the "Date Range From" month
+            to the end of the "Date Range To" month.
+        </p>
+
         <x-form action="{{ route('report.summary') }}" method="get" class="row">
 
             <div class="col">
@@ -33,9 +38,9 @@
                     <tr>
                         <td>{{ $result->category_name }}</td>
                         <td class="text-end">{{ $result->transaction_count }}</td>
-                        <td class="text-end">{{ money($result->income) }}</td>
-                        <td class="text-end">{{ money($result->outcome) }}</td>
-                        <td class="text-end">{{ money($result->value) }}</td>
+                        <td class="text-end">{{ money($result->income)->simple() }}</td>
+                        <td class="text-end">{{ money($result->outcome)->simple() }}</td>
+                        <td class="text-end">{{ money($result->value)->simple() }}</td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -43,9 +48,9 @@
                 <tr class="fw-bold">
                     <td>Totals</td>
                     <td class="text-end">{{ $totals['transaction_count'] }}</td>
-                    <td class="text-end">{{ money($totals['income']) }}</td>
-                    <td class="text-end">{{ money($totals['outcome']) }}</td>
-                    <td class="text-end">{{ money($totals['value']) }}</td>
+                    <td class="text-end">{{ money($totals['income'])->simple() }}</td>
+                    <td class="text-end">{{ money($totals['outcome'])->simple() }}</td>
+                    <td class="text-end">{{ money($totals['value'])->simple() }}</td>
                 </tr>
                 </tfoot>
             </table>

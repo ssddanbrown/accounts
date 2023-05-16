@@ -26,6 +26,11 @@ class MoneyFormat implements Htmlable
         return new HtmlString("<span class=\"money text-{$class}\">{$sign}£{$formattedVal}</span>");
     }
 
+    public function simple(): string
+    {
+        return number_format(abs($this->value / 100), 2, '.', ',');
+    }
+
     public function input(): string
     {
         return number_format($this->value / 100, 2, '.', '');
