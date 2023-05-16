@@ -2,6 +2,7 @@
 
 namespace App\Casts;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 class MoneyCast implements CastsAttributes
@@ -13,7 +14,7 @@ class MoneyCast implements CastsAttributes
      * @param  mixed  $value
      * @return mixed
      */
-    public function get($model, string $key, $value, array $attributes)
+    public function get(Model $model, string $key, mixed $value, array $attributes)
     {
         return $value;
     }
@@ -25,7 +26,7 @@ class MoneyCast implements CastsAttributes
      * @param  mixed  $value
      * @return mixed
      */
-    public function set($model, string $key, $value, array $attributes)
+    public function set(Model $model, string $key, mixed $value, array $attributes)
     {
         return is_int($value) ? $value : round(floatval($value) * 100);
     }
