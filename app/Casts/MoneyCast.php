@@ -10,8 +10,6 @@ class MoneyCast implements CastsAttributes
     /**
      * Cast the given value.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @param  mixed  $value
      * @return mixed
      */
     public function get(Model $model, string $key, mixed $value, array $attributes)
@@ -22,8 +20,6 @@ class MoneyCast implements CastsAttributes
     /**
      * Prepare the given value for storage.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @param  mixed  $value
      * @return mixed
      */
     public function set(Model $model, string $key, mixed $value, array $attributes)
