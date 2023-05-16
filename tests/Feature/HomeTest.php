@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\Models\Note;
 use Tests\TestCase;
 
-class HomeTest extends TestCase
+final class HomeTest extends TestCase
 {
     public function test_home_redirects_to_login_if_not_authed(): void
     {

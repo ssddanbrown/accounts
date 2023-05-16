@@ -7,7 +7,7 @@ use App\Models\Transaction;
 use Carbon\Carbon;
 use Tests\TestCase;
 
-class TransactionTest extends TestCase
+final class TransactionTest extends TestCase
 {
     public function test_create_form_defaults_date_to_last_month(): void
     {
