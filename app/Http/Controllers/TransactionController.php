@@ -11,13 +11,16 @@ use Illuminate\View\View;
 
 class TransactionController extends Controller
 {
+    /**
+     * @var array<string, string[]>
+     */
     protected array $rules = [
         'transacted_at' => ['required', 'date'],
         'transacted_with' => ['required', 'string'],
         'value' => ['required', 'numeric'],
         'description' => ['nullable', 'string'],
         'notes' => ['nullable', 'string'],
-        'category_id' => ['nullable', 'int', 'exists:categories,id'],
+        'category_id' => ['required', 'int', 'exists:categories,id'],
     ];
 
     public function create(Request $request): View

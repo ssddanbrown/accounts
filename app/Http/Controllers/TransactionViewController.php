@@ -37,7 +37,7 @@ class TransactionViewController extends Controller
             return redirect()->route('transaction-view.month', ['yearMonth' => now()->subMonth()->format('Y-m')]);
         }
 
-        $dateFrom = Carbon::createFromFormat('Y-m', $yearMonth)->startOfMonth();
+        $dateFrom = Carbon::createFromFormat('Y-m-d', $yearMonth . '-01')->startOfMonth();
         $dateTo = $dateFrom->clone()->endOfMonth();
 
         $query = $this->getBaseQuery()

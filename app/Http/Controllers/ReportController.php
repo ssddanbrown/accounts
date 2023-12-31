@@ -16,8 +16,8 @@ class ReportController extends Controller
         $yearMonthFrom = $request->get('from', $lastMonth);
         $yearMonthTo = $request->get('to', $lastMonth);
 
-        $dateFrom = Carbon::createFromFormat('Y-m', $yearMonthFrom)->startOfMonth();
-        $dateTo = Carbon::createFromFormat('Y-m', $yearMonthTo)->endOfMonth();
+        $dateFrom = Carbon::createFromFormat('Y-m-d', $yearMonthFrom . '-01')->startOfMonth();
+        $dateTo = Carbon::createFromFormat('Y-m-d', $yearMonthTo . '-01')->endOfMonth();
 
         $categorisedTransactions = Transaction::query()->select([
             'category_id',
